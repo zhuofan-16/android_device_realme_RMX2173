@@ -1,0 +1,8 @@
+# Kernel Power Off Charging (KPOC)
+/system/bin/kpoc_charger         u:object_r:kpoc_charger_exec:s0
+
+# Rootfs
+/persist(/.*)? u:object_r:persist_file:s0
+
+# Touchpanel
+/proc/touchpanel/tp_fw_update        u:object_r:proc_touchpanel:s0

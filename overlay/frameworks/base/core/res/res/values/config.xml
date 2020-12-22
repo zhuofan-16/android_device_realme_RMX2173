@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (c) 2009, The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+
+<!-- These resources are around just to allow their values to be customized
+     for different hardware and product builds.  Do not translate. -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- If true, the screen can be rotated via the accelerometer in all 4
+         rotations as the default behavior. -->
+    <bool name="config_allowAllRotations">false</bool>
+    <bool name="config_dozeAfterScreenOff">true</bool>
+    <bool name="config_showNavigationBar">true</bool>
+    <bool name="config_wifi_dual_band_support">true</bool>
+    <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
+    <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">true</bool>
+    <bool name="config_supportDoubleTapWake">true</bool>
+    <bool name="config_wifi_softap_ieee80211ac_supported">true</bool>
+    <bool name="config_fillMainBuiltInDisplayCutout">false</bool>
+    <bool name="config_hasVoocCharger">true</bool>
+    <bool name="config_enableWifiDisplay">true</bool>
+    <bool name="config_enableNetworkLocationOverlay">false</bool>
+    <bool name="config_enableMultiUserUI">true</bool>
+    <bool name="config_device_volte_available">true</bool>
+
+    <!-- Flag specifying whether VT is available on device -->
+    <bool name="config_device_vt_available">true</bool>
+
+    <!-- Flag specifying whether WFC over IMS is available on device -->
+    <bool name="config_device_wfc_ims_available">true</bool>
+    <bool name="config_camera_sound_forced">true</bool>
+
+    <!-- Flag specifying whether VoLTE should be available for carrier: independent of
+         carrier provisioning. If false: hard disabled. If true: then depends on carrier
+         provisioning, availability etc -->
+    <bool name="config_carrier_volte_available">true</bool>
+    <bool name="config_carrier_volte_tty_supported">true</bool>
+
+    <!-- Flag specifying whether WFC over IMS should be available for carrier: independent of
+         carrier provisioning. If false: hard disabled. If true: then depends on carrier
+         provisioning, availability etc -->
+    <bool name="config_carrier_wfc_ims_available">true</bool>
+
+    <bool name="config_dozeAfterScreenOffByDefault">true</bool>
+    <bool name="config_displayBlanksAfterDoze">true</bool>
+    <bool name="config_dynamic_bind_ims">true</bool>
+    <bool name="config_eap_sim_based_auth_supported">true</bool>
+    <bool name="config_lidControlsSleep">true</bool>
+
+    <!-- Should the pinner service pin the Camera application? -->
+    <bool name="config_pinnerCameraApp">true</bool>
+
+    <!-- Should the pinner service pin the Home application? -->
+    <bool name="config_pinnerHomeApp">true</bool>
+
+    <!-- Whether the always on display mode is available. -->
+    <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
+
+    <!-- Control whether the always on display mode is enabled by default. This value will be used
+         during initialization when the setting is still null. -->
+    <bool name="config_dozeAlwaysOnEnabled">true</bool>
+
+    <bool name="config_supportDoubleTapWake">true</bool>
+    <bool name="config_swipe_up_gesture_setting_available">true</bool>
+    <bool name="config_unplugTurnsOnScreen">true</bool>
+    <bool name="config_tether_upstream_automatic">true</bool>
+    <bool name="config_wifi_background_scan_support">true</bool>
+    <bool name="config_wifi_dual_band_support">true</bool>
+    <bool name="config_wifi_fast_bss_transition_enabled">true</bool>
+    <bool name="config_wifi_p2p_mac_randomization_supported">true</bool>
+    <bool name="config_wifi_softap_acs_supported">true</bool>
+    <bool name="skip_restoring_network_selection">true</bool>
+    <!-- Height of the status bar -->
+    <dimen name="status_bar_height_portrait">28dp</dimen>
+    <string name="config_ims_package">com.mediatek.ims</string>
+    <dimen name="status_bar_height_landscape">28dp</dimen>
+    <dimen name="quick_qs_offset_height">48dp</dimen>
+    <dimen name="quick_qs_total_height">176dp</dimen>
+    <!-- The default peak refresh rate for a given device. Change this value if you want to allow
+         for higher refresh rates to be automatically used out of the box -->
+    <integer name="config_defaultPeakRefreshRate">130</integer>
+    <!-- Screen brightness when dozing. -->
+    <integer name="config_screenBrightnessDoze">5</integer>
+    <string name="config_dozeComponent">com.android.dreams.alwaysondisplay/.AlwaysOnDisplay</string>
+    <integer name="config_shortPressOnPowerBehavior">1</integer>
+    <string name="config_mainBuiltInDisplayCutout">M 0,0 L -56, 0 L -54, 28 L 54, 28 L 56, 0 Z @dp</string>
+    <integer name="config_num_physical_slots">2</integer>
+    <string name="config_mainBuiltInDisplayCutoutRectApproximation">01040184</string>
+    <!-- Values for GPS configuration -->
+    <string-array name="config_gpsParameters">
+        <item>SUPL_HOST=supl.google.com</item>
+        <item>SUPL_PORT=7275</item>
+        <item>SUPL_VER=0x20000</item>
+        <item>SUPL_MODE=1</item>
+        <item>SUPL_ES=1</item>
+        <item>LPP_PROFILE=0</item>
+        <item>USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL=1</item>
+        <item>A_GLONASS_POS_PROTOCOL_SELECT=0</item>
+        <item>GPS_LOCK=0</item>
+    </string-array>
+
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable
+         bluetooth interfaces.  If the device doesn't want to support tethering over bluetooth this
+         should be empty. -->
+    <string-array name="config_tether_bluetooth_regexs">
+        <item>bt-pan</item>
+        <item>bt-dun</item>
+    </string-array>
+
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable
+         USB interfaces.  If the device doesn't want to support tething over USB this should
+         be empty.  An example would be "usb.*" -->
+    <string-array name="config_tether_usb_regexs">
+        <item>rndis\\d</item>
+    </string-array>
+
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable
+         Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
+         should be empty.  An example would be "softap.*" -->
+    <string-array name="config_tether_wifi_regexs">
+        <item>ap\\d</item>
+    </string-array>
+    <!-- MMS user agent string -->
+    <string name="config_mms_user_agent">Android-Mms/0.1</string>
+
+    <!-- MMS user agent prolfile url -->
+    <string name="config_mms_user_agent_profile_url">http://www.google.com/oha/rdf/ua-profile-kila.xml</string>
+
+    <!--  Define Google play service package for FRP-->
+    <string name="config_persistentDataPackageName">com.google.android.gms</string>
+    <integer name="config_multiuserMaximumUsers">4</integer>

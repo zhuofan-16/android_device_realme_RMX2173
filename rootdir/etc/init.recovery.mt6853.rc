@@ -1,0 +1,158 @@
+
+on fs
+    #wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    #symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    install_keyring
+
+on fs
+    start hwservicemanager
+    start servicemanager
+
+# Separate copy needed to use /sbin/linker64 instead of /system/bin/linker64
+service mobicore /sbin/mcDriverDaemon --P1 /mnt/vendor/persist/mcRegistry \
+	-r /vendor/app/mcRegistry/06090000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/020f0000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/05120000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/020b0000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/05070000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/030b0000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/03100000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/030c0000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/40188311faf343488db888ad39496f9a.drbin \
+	-r /vendor/app/mcRegistry/070c0000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/090b0000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/0f5eed3c3b5a47afacca69a84bf0efad.drbin \
+	-r /vendor/app/mcRegistry/07060000000000000000000000007169.drbin \
+	-r /vendor/app/mcRegistry/4be4f7dc1f2c11e5b5f7727283247c7f.drbin \
+	-r /vendor/app/mcRegistry/08070000000000000000000000008270.drbin \
+	-r /vendor/app/mcRegistry/07070000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/07407000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/9073f03a9618383bb1856eb3f990babd.drbin \
+	-r /vendor/app/mcRegistry/6b3f5fa0f8cf55a7be2582587d62d63a.drbin \
+	-r /vendor/app/mcRegistry/09070000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/5020170115e016302017012521300000.drbin
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service hwservicemanager /sbin/hwservicemanager
+    user root
+    group root readproc
+    disabled
+    onrestart setprop hwservicemanager.ready false
+    seclabel u:r:recovery:s0
+
+service servicemanager /sbin/servicemanager
+    user root
+    group root readproc
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore_auth /sbin/keystore_auth
+    oneshot
+    user system
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore /sbin/keystore /tmp/misc/keystore
+    user root
+    group root drmrpc readproc
+    disabled
+    seclabel u:r:recovery:s0
+
+service gatekeeper-1-0 /sbin/android.hardware.gatekeeper@1.0-service
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service keymaster-4-0 /sbin/android.hardware.keymaster@4.0-service.trustonic
+    user root
+    group root drmrpc
+    disabled
+    seclabel u:r:recovery:s0
+
+####
+on property:hwservicemanager.ready=true
+    mkdir /mnt/vendor
+    mkdir /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/mcRegistry
+    wait /sbin/fingerprint_ready 8
+    start mobicore
+    start keymaster-4-0
+    start gatekeeper-1-0
+
+on property:ro.crypto.state=unsupported
+    stop mobicore
+    stop keymaster-4-0
+    stop gatekeeper-1-0
+    #stop servicemanager
+    stop hwservicemanager
+
+on property:ro.crypto.state=unencrypted
+    stop mobicore
+    stop keymaster-4-0
+    stop gatekeeper-1-0
+    #stop servicemanager
+    stop hwservicemanager
+
+on property:twrp.decrypt.done=true && property:twrp.all.users.decrypted=true
+    stop mobicore
+    stop keymaster-4-0
+    stop gatekeeper-1-0
+    #stop servicemanager
+    stop hwservicemanager
+
+
+# fix magisk.zip install
+service fixmagisk /init.magisk.sh
+    #oneshot
+    #disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+
+
+
+
+
+
+# read ro.build.fingerprint from system, setprop it. for ota
+service fingerprintid /init.fingerprintid.sh
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+on early-init
+    setprop recovery.perf.mode 1
+    start fingerprintid
+
+on boot
+    setprop recovery.perf.mode 0
+    # Enable double-tap to wake
+    #write /proc/touchpanel/double_tap_enable 1
+    # Enable OTG
+    write /sys/class/power_supply/usb/otg_switch 1
+
+on property:recovery.perf.mode=1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+on property:recovery.perf.mode=0
+    write /sys/devices/system/cpu/cpu1/online 0
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 0
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 0
