@@ -1,27 +1,25 @@
-Device Tree for Realme U1
-===========================================
+Copyright (C) 2020 The LineageOS Project
 
-The Realme U1 (codenames _"RMX1831"_ and _"RMX1833"_ ) is a mid-range smartphone from Realme, announced in November 2018.	
- 
+Device configuration for Realme Q2 Pro
+============================================
+
+The Realem Q2 Pro (codenamed _"RMX2173CN"_) is a high range smartphone from Realme
+
+It was announced in 13 October 2020 and released in 19 October 2020.
+
 ## Device specifications
 
 Basic   | Spec Sheet
 -------:|:-------------------------
-OS	| Android 8.1 (Oreo), upgradable to Android 9.0 (Pie)	
-CPU     | Octa-core (4x2.1 GHz Cortex-A73 & 4x2.0 GHz Cortex-A53)
-Chipset | Mediatek Helio P70
-GPU     | Mali-G72 MP3
-Memory  | 3GB/4GB RAM
-Storage | 32GB/64GB
-MicroSD | up to 256 GB (dedicated slot)
-Battery | Non-removable Li-Ion 3500 mAh battery
-Resolution | 1080 x 2340 pixels, 19.5:9 ratio (~409 ppi density)
-Camera (Rear)  | (Dual) 13 MP, f/2.2, AF. 2 MP, f/2.4, depth sensor
-Rear Camera Features | LED flash, HDR, panorama
-Video	| 1080p@30fps, 720p@90fps
-Camera (Front)  | 25 MP, f/2.0, 1/2.8", 0.9µm
-Features| Fingerprint (rear-mounted), accelerometer, proximity, compass	
+SoC     | MediaTek Dimensity 800U 5G (7 nm)
+CPU     | Octa-core (2x2.4 GHz Cortex-A76 & 6x2.0 GHz Cortex-A55)
+GPU     | Mali-G57 MC3
+Memory  | 8 GB RAM
+Shipped Android Version | 10 with RealmeUI1.0
+Storage | 128/256 GB
+Battery | Non-removable Li-Po 4300 mAh battery
+Display | 1080 x 2400 pixels, 20:9 ratio (~411 ppi density) 6.4 inches, 98.9 cm2 (~82.6% screen-to-body ratio)Super AMOLED, 600 nits (peak)
 
 ## Device picture
 
-![Realme U1](https://images-na.ssl-images-amazon.com/images/I/71G%2BlExqsrL._AC_SX679_.jpg "Realme U1")
+![Realme Q2 Pro](https://fdn2.gsmarena.com/vv/pics/realme/realme-q2-pro-2.jpg "Realme Q2 Pro")
