@@ -25,6 +25,13 @@ TARGET_CPU_ABI_LIST := arm64-v8a,armeabi-v7a,armeabi
 TARGET_CPU_ABI_LIST_64_BIT := arm64-v8a
 TARGET_CPU_ABI_LIST_32_BIT := armeabi-v7a,armeabi
 
+# DRM
+TARGET_ENABLE_MEDIADRM_64 := true
+
+# Metadata
+BOARD_USES_METADATA_PARTITION := true
+BOARD_ROOT_EXTRA_FOLDERS += metadata
+
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := mt6853
 TARGET_NO_BOOTLOADER := true
@@ -46,7 +53,7 @@ WITH_DEXPREOPT := true
 
 #Kernel
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 androidboot.selinux=permissive androidboot.configfs=true
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_BOOTIMG_HEADER_VERSION := 2
@@ -135,5 +142,21 @@ DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
 # Sepolicy
 include device/mediatek/sepolicy/sepolicy.mk
+# Sepolicy
+TARGET_USES_PREBUILT_VENDOR_SEPOLICY := true
+TARGET_HAS_FUSEBLK_SEPOLICY_ON_VENDOR := true
+# We have to skip checkpolicy because we have to re-define rild
+# in device system sepolicy to work around IMS issues.
+SELINUX_IGNORE_NEVERALLOWS := true
+
+BOARD_PLAT_PUBLIC_SEPOLICY_DIR += \
+    device/mediatek/sepolicy/basic/plat_public \
+    device/mediatek/sepolicy/bsp/plat_public \
+    device/mediatek/sepolicy/full/plat_public
+
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += \
+    device/mediatek/sepolicy/basic/plat_private \
+    device/mediatek/sepolicy/bsp/plat_private \
+    device/mediatek/sepolicy/full/plat_private
 
 -include vendor/realme/RMX2173/BoardConfigVendor.mk
