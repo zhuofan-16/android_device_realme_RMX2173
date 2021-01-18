@@ -1,0 +1,5 @@
+type ccci_rpcd, domain;
+type ccci_rpcd_exec, exec_type, file_type;
+init_daemon_domain(ccci_rpcd)
+
+allow ccci_rpcd default_prop:file { getattr map open read };

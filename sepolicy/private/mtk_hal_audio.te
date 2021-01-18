@@ -1,0 +1,12 @@
+type mtk_hal_audio, domain;
+type mtk_hal_audio_exec, exec_type, file_type;
+init_daemon_domain(mtk_hal_audio)
+
+type debugfs_ion, domain;
+type debugfs_ion_exec, exec_type, file_type;
+init_daemon_domain(debugfs_ion)
+
+allow mtk_hal_audio debugfs_ion:dir search;
+allow mtk_hal_audio default_prop:file { getattr map open read };
+allow mtk_hal_audio gsi_metadata_file:dir search;
+allow mtk_hal_audio sysfs_dt_firmware_android:file { getattr open read };

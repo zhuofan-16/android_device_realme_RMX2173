@@ -1,0 +1,1 @@
+allow zygote theme_prop:file { getattr map open read };

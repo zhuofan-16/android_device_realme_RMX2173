@@ -1,0 +1,8 @@
+type self_init, domain;
+type self_init_exec, exec_type, file_type;
+init_daemon_domain(self_init)
+
+allow self_init default_prop:file { getattr map open read };
+allow self_init self:capability dac_read_search;
+allow self_init system_file:file { open read };
+allow self_init system_prop:file { getattr map open read };

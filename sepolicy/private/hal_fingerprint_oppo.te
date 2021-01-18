@@ -1,0 +1,6 @@
+type hal_fingerprint_oppo, domain;
+type hal_fingerprint_oppo_exec, exec_type, file_type;
+
+allow hal_fingerprint_oppo default_android_hwservice:hwservice_manager find;
+allow hal_fingerprint_oppo fingerprintd_data_file:file { getattr open read append write };
+allow hal_fingerprint_oppo init:binder call;

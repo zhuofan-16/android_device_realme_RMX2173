@@ -1,0 +1,7 @@
+type ipsec, domain;
+type ipsec_exec, exec_type, file_type;
+init_daemon_domain(ipsec)
+
+allow ipsec self:capability dac_override;
+allow ipsec self:capability2 block_suspend;
+allow ipsec sysfs_wake_lock:file { open read write };

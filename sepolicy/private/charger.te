@@ -1,0 +1,1 @@
+allow charger sysfs:file { getattr open read };

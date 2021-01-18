@@ -1,0 +1,6 @@
+type dynamic_fw_data_file, domain;
+type dynamic_fw_data_file_exec, exec_type, file_type;
+init_daemon_domain(dynamic_fw_data_file)
+
+allow vendor_init dynamic_fw_data_file:dir setattr;
+allow vendor_init loop_control_device:chr_file getattr;

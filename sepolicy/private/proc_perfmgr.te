@@ -1,0 +1,5 @@
+type proc_perfmgr, domain;
+type proc_perfmgr_exec, exec_type, file_type;
+init_daemon_domain(proc_perfmgr)
+
+allow proc_perfmgr proc:filesystem associate;

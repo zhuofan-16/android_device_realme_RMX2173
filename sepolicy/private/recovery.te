@@ -1,0 +1,2 @@
+allow recovery block_device:blk_file ioctl;
+allow recovery self:capability sys_rawio;

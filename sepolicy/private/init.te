@@ -1,0 +1,42 @@
+type mtk_hal_light, domain;
+type mtk_hal_light_exec, exec_type, file_type;
+init_daemon_domain(mtk_hal_light)
+
+type sysfs_battery_supply, domain;
+type sysfs_battery_supply_exec, exec_type, file_type;
+init_daemon_domain(sysfs_battery_supply)
+
+type sysfs_mmcblk, domain;
+type sysfs_mmcblk_exec, exec_type, file_type;
+init_daemon_domain(sysfs_mmcblk)
+
+# HALs
+#allow init hal_fingerprint_oppo:binder { call };
+
+# System server
+allow init system_server:binder { call };
+
+# SysFS
+allow init sysfs_leds:file { read };
+
+# Vendor overlay
+allow init vendor_configs_file:{ dir file } mounton;
+allow init vendor_overlay_file:{ dir file } mounton;
+
+# hwservicemanager
+allow init hal_fingerprint_hwservice:hwservice_manager { add find };
+allow init hal_fingerprint_oppo:binder { call transfer };
+allow init hal_fingerprint_oppo:process ptrace;
+allow init hal_light_hwservice:hwservice_manager add;
+allow init hidl_base_hwservice:hwservice_manager add;
+allow init hwservicemanager:binder { call transfer };
+allow init mtk_hal_light_exec:file mounton;
+allow init proc:file { setattr write };
+allow init socket_device:sock_file { create setattr };
+allow init sysfs_battery_supply:file setattr;
+allow init sysfs_mmcblk:file setattr;
+allow init system_file:file execute_no_trans;
+allow init vendor_file:file mounton;
+allow init vendor_shell_exec:file execute_no_trans;
+allow init vendor_toolbox_exec:file execute_no_trans;
+allow init socket_device:sock_file unlink;

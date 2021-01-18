@@ -1,0 +1,6 @@
+type hal_face_oppo, domain;
+type hal_face_oppo_exec, exec_type, file_type;
+init_daemon_domain(hal_face_oppo)
+
+allow hal_face_oppo default_android_hwservice:hwservice_manager find;
+allow hal_face_oppo system_prop:file { getattr map open read };

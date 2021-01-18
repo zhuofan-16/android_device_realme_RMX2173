@@ -1,0 +1,5 @@
+type proc_cpufreq, domain;
+type proc_cpufreq_exec, exec_type, file_type;
+init_daemon_domain(proc_cpufreq)
+
+allow proc_cpufreq proc:filesystem associate;

@@ -1,0 +1,18 @@
+type logmuch_prop, domain;
+type logmuch_prop_exec, exec_type, file_type;
+init_daemon_domain(logmuch_prop)
+
+# Adapted from the "recovery_only" macro
+define(`system_only', ifelse(target_recovery, `true', , $1))
+
+# Define only in system because we can't skip checkpolicy
+# in recovery.
+system_only(`
+  type rild, domain;
+  # rild needs to read these props for IMS to work
+  allow rild exported3_default_prop:file r_file_perms;
+');
+
+allow rild default_prop:file { getattr map open read };
+allow rild gsi_metadata_file:dir search;
+allow rild logmuch_prop:file { getattr map open read };

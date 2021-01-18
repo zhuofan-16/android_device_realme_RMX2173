@@ -1,0 +1,9 @@
+type ccci_mdinit, domain;
+type ccci_mdinit_exec, exec_type, file_type;
+init_daemon_domain(ccci_mdinit)
+
+allow ccci_mdinit default_prop:file { getattr map open read };
+allow ccci_mdinit gsi_metadata_file:dir search;
+allow ccci_mdinit proc_cmdline:file { getattr open read };
+allow ccci_mdinit sysfs_dt_firmware_android:dir search;
+allow ccci_mdinit sysfs_dt_firmware_android:file { getattr open read };

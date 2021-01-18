@@ -1,0 +1,9 @@
+type mnld, domain;
+type mnld_exec, exec_type, file_type;
+init_daemon_domain(mnld)
+
+allow mnld default_prop:file { getattr map open read };
+allow mnld gsi_metadata_file:dir search;
+allow mnld proc_cmdline:file { getattr open read };
+allow mnld sysfs_dt_firmware_android:dir search;
+allow mnld sysfs_dt_firmware_android:file { getattr open read };
